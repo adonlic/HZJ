@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/statistic_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_picture"
+        android:text="POSTIGNUĆA:"
+        android:textColor="@android:color/darker_gray"/>
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@+id/statistic_text"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:id="@+id/line11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/line"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/achievement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:tint="@android:color/darker_gray"
+            android:src="@drawable/ic_achievement"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Društvena osoba"
+            android:textColor="@android:color/darker_gray"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/line12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/line"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/achievement2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:tint="@android:color/darker_gray"
+            android:src="@drawable/ic_achievement2"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hrabar/a ko buba"
+            android:textColor="@android:color/darker_gray"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/line11"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/achievement3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:tint="@android:color/darker_gray"
+            android:src="@drawable/ic_achievement3"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uzoran/a ko policajac"
+            android:textColor="@android:color/darker_gray"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/line14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/line12"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/achievement4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:tint="@android:color/darker_gray"
+            android:src="@drawable/ic_achievement4"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hrabar/a ko buba"
+            android:textColor="@android:color/darker_gray"/>
+    </LinearLayout>
+
+</RelativeLayout>

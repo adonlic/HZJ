@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_profile"/>
+
+    <TextView
+        android:id="@+id/name_and_surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/profile_picture"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:text="Ime i prezime"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/profile_picture"
+        android:layout_below="@+id/name_and_surname"
+        android:layout_marginLeft="15dp"
+        android:text="korisničko ime"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/statistic_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/profile_picture"
+        android:text="STATISTIKA:"
+        android:textColor="@color/colorPrimaryDark"/>
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/statistic_text"
+        android:background="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:id="@+id/speed_of_decision"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
+        android:text="brzina odlučivanja"
+        android:layout_below="@id/line"
+        android:textColor="@color/colorPrimaryDark"/>
+    <TextView
+        android:id="@+id/speed_of_decision_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="2dp"
+        android:text="4.5/5"
+        android:layout_below="@id/line"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="spremnost"
+        android:layout_below="@id/speed_of_decision"
+        android:textColor="@color/colorPrimaryDark"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:text="3.2/5"
+        android:layout_below="@id/speed_of_decision"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:text="ocjena"
+        android:textColor="@color/colorPrimaryDark"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:text="4.5/5"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/colorPrimaryDark"/>
+
+</RelativeLayout>

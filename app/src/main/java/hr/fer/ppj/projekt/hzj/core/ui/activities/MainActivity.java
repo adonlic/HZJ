@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         // RETROFIT
         setupAPI();
-
         // CACHE-TO SERVER CONNECTION
         setupDataStorage();
 
@@ -107,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // getSupportActionBar().setHomeButtonEnabled(true);
         // getSupportActionBar().setDisplayShowHomeEnabled(true);
+        // showing navigation drawer icon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(tab.getPosition(), true);
                 // tabLayout.getSelectedTabPosition(), true....
                 // Toast.makeText(getBaseContext(), "TAB ID = " + tabLayout.getSelectedTabPosition(), Toast.LENGTH_LONG).show();   // TOAST¨!!!!!
-                Log.i("TAB " + tab.getText(), "onTabSelected()");
+                // Log.i("TAB " + tab.getText(), "onTabSelected()");
             }
 
             @Override
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 int tabIconColor = ContextCompat.getColor(
                         getBaseContext(), R.color.colorTabUnselected);
                 tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
-                Log.i("TAB " + tab.getText(), "onTabUnselected()");
+                // Log.i("TAB " + tab.getText(), "onTabUnselected()");
             }
 
             @Override
@@ -178,12 +178,14 @@ public class MainActivity extends AppCompatActivity {
         SectionsFragment sections = new SectionsFragment();
         QuizzesFragment quizzes = new QuizzesFragment();
         FavoritesFragment favorites = new FavoritesFragment();
-        Log.w("Fragment ->", "initialization");
+        // Log.w("Fragment ->", "initialization");
         sections.dataContextReference(dataContext);
         quizzes.dataContextReference(dataContext);
         favorites.dataContextReference(dataContext);
 
         sections.referenceParentContext(this);
+        quizzes.referenceParentContext(this);
+        favorites.referenceParentContext(this);
 
         // bind fragments to adapter that'll control positioning and so...
         viewPagerAdapter.addFragment(sections, "Nauči me");

@@ -18,11 +18,15 @@ import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.adapters.FavoritesRecyclerAdapter;
 import hr.fer.ppj.projekt.hzj.core.models.Video;
 import hr.fer.ppj.projekt.hzj.core.repositories.implementations.HZJContext;
+import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VideosActivity extends AppCompatActivity {
     Toolbar toolbar;
     HZJContext dataContext;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +36,8 @@ public class VideosActivity extends AppCompatActivity {
         // Bundle bundle = getIntent().getExtras();
         Intent intent = getIntent();
         dataContext = new HZJContext(this);
-        int id = intent.getIntExtra("SectionID", 0);    // 0 is default
-        Log.i("sectionID = ", String.valueOf(id));
+        id = intent.getIntExtra("SectionID", 0);    // 0 is default
+        // Log.i("sectionID = ", String.valueOf(id));
         dataContext.Videos().fetchAt(id);
         setupToolbar(intent.getStringExtra("SectionName"));
         setUpRecyclerView(this.getWindow().getDecorView().getRootView());
@@ -51,9 +55,8 @@ public class VideosActivity extends AppCompatActivity {
     private void setUpRecyclerView(View view) {
         RecyclerView recyclerView = (RecyclerView) view
                 .findViewById(R.id.section_videos_recycler_view);
-        FavoritesRecyclerAdapter videosRecyclerAdapter = new FavoritesRecyclerAdapter(
-                getBaseContext(),
-                dataContext.Videos().getAll()
+        final FavoritesRecyclerAdapter videosRecyclerAdapter = new FavoritesRecyclerAdapter(
+                getBaseContext()
         );
         // Log.i("video --> ", dataContext.Videos().get(0).getUrl());
         // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext());
@@ -63,6 +66,20 @@ public class VideosActivity extends AppCompatActivity {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getBaseContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        // API CALL
+        Call<List<Video>> call = HZJService.getService().getVideosFromSelectedSection(id);
+        call.enqueue(new Callback<List<Video>>() {
+            @Override
+            public void onResponse(Call<List<Video>> call, Response<List<Video>> response) {
+                videosRecyclerAdapter.setAdapterData(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Video>> call, Throwable t) {
+
+            }
+        });
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }

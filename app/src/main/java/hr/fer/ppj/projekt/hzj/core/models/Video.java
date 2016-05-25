@@ -1,5 +1,6 @@
 package hr.fer.ppj.projekt.hzj.core.models;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 import com.google.gson.annotations.Expose;
@@ -25,6 +26,10 @@ public class Video {
     @SerializedName("SkupinaID")
     @Expose
     private int sectionId;
+
+
+    // private Drawable backgroundImage;
+
 
     // references to other tables
     private List<Favorite> favoriteList;
@@ -96,6 +101,16 @@ public class Video {
     public void setQuizHasVideoList(List<QuizHasVideo> quizHasVideoList) {
         this.quizHasVideoList = quizHasVideoList;
     }
+
+    /*
+    public Drawable getBackgroundImage() {
+        return backgroundImage;
+    }
+
+    public void setBackgroundImage(Drawable backgroundImage) {
+        this.backgroundImage = backgroundImage;
+    }
+    */
 
     // constructors
     public Video() {

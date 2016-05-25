@@ -23,6 +23,10 @@ public class Quiz {
     @Expose
     private int hardenessId;
 
+
+    private String backgroundImageURL;
+
+
     // references to other tables
     private List<QuizHasVideo>  quizHasVideoList;
     private Hardness hardness;
@@ -84,6 +88,14 @@ public class Quiz {
 
     public void setQuizResultList(List<QuizResult> quizResultList) {
         this.quizResultList = quizResultList;
+    }
+
+    public String getBackgroundImageURL() {
+        return backgroundImageURL;
+    }
+
+    public void setBackgroundImageURL(String backgroundImageURL) {
+        this.backgroundImageURL = backgroundImageURL;
     }
 
     // constructors

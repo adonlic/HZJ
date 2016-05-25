@@ -48,23 +48,18 @@
         <activity
             android:name=".core.ui.activities.SettingsActivity"
             android:parentActivityName=".core.ui.activities.MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".camera.ui.CameraActivity"
-            android:parentActivityName=".core.ui.activities.MainActivity">
-
-        </activity>
+            android:parentActivityName=".core.ui.activities.MainActivity"></activity>
         <activity
             android:name=".core.ui.activities.LoginActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".core.ui.activities.VideosActivity"
-            android:parentActivityName=".core.ui.activities.MainActivity">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".core.ui.activities.VideosActivity"
+            android:parentActivityName=".core.ui.activities.MainActivity"></activity>
+        <activity android:name=".core.ui.activities.PlayVideoActivity"
+            android:parentActivityName=".core.ui.activities.VideosActivity"></activity>
     </application>
 
 </manifest>

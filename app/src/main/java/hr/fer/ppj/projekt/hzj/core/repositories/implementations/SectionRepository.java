@@ -68,10 +68,10 @@ public class SectionRepository extends HZJRepository<Section> implements ISectio
             @Override
             public void onResponse(Call<List<Section>> call,
                                    Response<List<Section>> response) {
-                sections = response.body();
-                for (Section section : sections)
-                    ImageManager.setImageURL(section);
-                Log.i("SectionRepository --> ", "Data is loaded....");
+                // sections = response.body();
+                // for (Section section : sections)
+                //     ImageManager.setImageURL(section);
+                // Log.i("SectionRepository --> ", "Data is loaded....");
             }
 
             @Override

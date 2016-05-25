@@ -1,6 +1,7 @@
 package hr.fer.ppj.projekt.hzj.core.ui.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,17 +13,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.adapters.FavoritesRecyclerAdapter;
 import hr.fer.ppj.projekt.hzj.core.adapters.SectionsRecyclerAdapter;
 import hr.fer.ppj.projekt.hzj.core.models.Favorite;
+import hr.fer.ppj.projekt.hzj.core.models.Video;
 import hr.fer.ppj.projekt.hzj.core.repositories.implementations.HZJContext;
+import hr.fer.ppj.projekt.hzj.core.services.HZJService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavoritesFragment extends Fragment {
     HZJContext dataContext;
+    Context context;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -43,18 +52,34 @@ public class FavoritesFragment extends Fragment {
     }
 
     private void setUpRecyclerView(View view) {
-        RecyclerView recyclerView = (RecyclerView) view
+        final RecyclerView recyclerView = (RecyclerView) view
                 .findViewById(R.id.videos_n_favorites_recycler_view);
-        dataContext.Favorites().fetchAt(2); // HARDKODIRANO NA UserID = 2!!!
-        FavoritesRecyclerAdapter favoritesRecyclerAdapter = new FavoritesRecyclerAdapter(
-                getContext(),
-                dataContext.Favorites().getAll()
+        // dataContext.Favorites().fetchAt(2); // HARDKODIRANO NA UserID = 2!!!
+        final FavoritesRecyclerAdapter favoritesRecyclerAdapter = new FavoritesRecyclerAdapter(
+                context
         );
         recyclerView.setAdapter(favoritesRecyclerAdapter);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        Call<List<Video>> call = HZJService.getService().getUserFavorites(2);       // USER.ID = 2 HARDCODED!
+        call.enqueue(new Callback<List<Video>>() {
+            @Override
+            public void onResponse(Call<List<Video>> call, Response<List<Video>> response) {
+                favoritesRecyclerAdapter.setAdapterData(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Video>> call, Throwable t) {
+
+            }
+        });
+
+        // recyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    public void referenceParentContext(Context context) {
+        this.context = context;
     }
 }

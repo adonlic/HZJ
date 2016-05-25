@@ -9,10 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.models.Quiz;
+import hr.fer.ppj.projekt.hzj.core.models.Section;
+import hr.fer.ppj.projekt.hzj.core.services.ImageManager;
 
 /**
  * Created by ANTE on 22.5.2016..
@@ -21,10 +26,11 @@ public class QuizzesRecyclerAdapter
         extends RecyclerView.Adapter<QuizzesRecyclerAdapter.QuizViewHolder> {
     private List<Quiz> quizzes;
     private LayoutInflater layoutInflater;
+    private Context activityContext;
 
-    public QuizzesRecyclerAdapter(Context context, List<Quiz> quizzes) {
-        this.quizzes = quizzes;
+    public QuizzesRecyclerAdapter(Context context) {
         this.layoutInflater = LayoutInflater.from(context);
+        this.activityContext = context;
     }
 
     @Override
@@ -36,16 +42,26 @@ public class QuizzesRecyclerAdapter
     }
 
     @Override
-    public int getItemCount() {
-        return quizzes.size();
-    }
-
-    @Override
     public void onBindViewHolder(QuizViewHolder holder, int position) {
         Quiz currentQuiz = quizzes.get(position);
         holder.setData(currentQuiz, position);
     }
 
+    @Override
+    public int getItemCount() {
+        if (quizzes == null)
+            return 0;
+
+        return quizzes.size();
+    }
+
+    public void setAdapterData(List<Quiz> sections) {
+        this.quizzes = new ArrayList<Quiz>();
+        this.quizzes.addAll(sections);
+        for (Quiz quizzes : this.quizzes)
+            ImageManager.setQuizImageURL(quizzes);
+        notifyDataSetChanged();
+    }
 
     class QuizViewHolder extends RecyclerView.ViewHolder {
         private TextView title, description;
@@ -64,7 +80,11 @@ public class QuizzesRecyclerAdapter
         public void setData(Quiz currentQuiz, int position) {
             this.title.setText(currentQuiz.getTitle());
             this.description.setText(currentQuiz.getDescription());
-            // set image...
+            Picasso.with(activityContext)
+                    .load(currentQuiz.getBackgroundImageURL())
+                    .fit()
+                    .centerCrop()
+                    .into(this.backgroundImage);
             this.position = position;
             this.current = currentQuiz;
         }

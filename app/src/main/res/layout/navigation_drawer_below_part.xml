@@ -38,7 +38,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Društvena osoba"
+            android:text="    Društvena osoba"
             android:textColor="@android:color/darker_gray"/>
     </LinearLayout>
     <LinearLayout
@@ -79,7 +79,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Uzoran/a ko policajac"
+            android:text="Uzoran/a policajac"
             android:textColor="@android:color/darker_gray"/>
     </LinearLayout>
     <LinearLayout

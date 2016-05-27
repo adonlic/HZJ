@@ -22,15 +22,12 @@ import hr.fer.ppj.projekt.hzj.R;
 
 public class CameraActivity extends AppCompatActivity
         implements CameraBridgeViewBase.CvCameraViewListener2 {
-    JavaCameraView cameraView;
-
-    BaseLoaderCallback baseLoaderCallback;
-
     // Used for logging success or failure messages
     private static final String TAG = "OCVSample::Activity";
 
     // Loads camera view of OpenCV for us to use. This lets us see using OpenCV
     private CameraBridgeViewBase mOpenCvCameraView;
+
 
     // These variables are used (at the moment) to fix camera orientation from 270degree to 0degree
     Mat mRgba;
@@ -47,98 +44,125 @@ public class CameraActivity extends AppCompatActivity
     private int framesTaken;
     Mat background;
 
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS:
+                {
+                    Log.i(TAG, "OpenCV loaded successfully");
+                    mOpenCvCameraView.enableView();
+                } break;
+                default:
+                {
+                    super.onManagerConnected(status);
+                } break;
+            }
+        }
+    };
+
     public CameraActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-    }
+    public void onCreate(Bundle savedInstanceState) {
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-        if (cameraView != null)
-            cameraView.disableView();
-    }
+        /*
+        //get background from Calibration
+        background = new Mat();
+        double[][][] temp = (double[][][]) getIntent().getExtras().getSerializable("background");
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+        for(int i=0; i<temp.length; i++){
+            for(int j=0; j<temp[i].length; j++){
+                background.put(i, j, temp[i][j]);
+            }
+        }
+*/
+        Log.i(TAG, "called onCreate");
+        super.onCreate(savedInstanceState);
 
-        if (cameraView != null)
-            cameraView.disableView();
-    }
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setContentView(R.layout.activity_camera);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // OpenCVLoader.initDebug();
-        // OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, this, baseLoaderCallback);
-        // baseLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        mOpenCvCameraView = (JavaCameraView) findViewById(R.id.camera_viewer);
+        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
 
         Log.i(TAG, "Trying to load OpenCV library");
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_1_0, this, baseLoaderCallback);
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
         } else {
             Log.d(TAG, "OpenCV library found inside package. Using it!");
-            baseLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        cameraView = (JavaCameraView) findViewById(R.id.camera_viewer);
 
 
-        baseLoaderCallback = new BaseLoaderCallback(this) {
-            @Override
-            public void onManagerConnected(int status) {
-                switch (status) {
-                    case LoaderCallbackInterface.SUCCESS:
-                    {
-                        // OpenCV loaded...
-                        // Log.i(TAG, "OpenCV loaded successfully");
-                        cameraView.enableView();
-                    } break;
-                    default:
-                    {
-                        super.onManagerConnected(status);
-                    } break;
-                }
-            }
-        };
+        /*
+        try {
+            hornTempl = Utils.loadResource(getApplicationContext(), R.drawable.horns, Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
+            zeroTempl = Utils.loadResource(getApplicationContext(), R.drawable.zero, Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "Image not loaded!", Toast.LENGTH_SHORT).show();
+        }
+        */
 
-        cameraView.setVisibility(SurfaceView.VISIBLE);
-        cameraView.setCvCameraViewListener(this);
+        /*
+        // this makes negatives
+        Mat temp = new Mat(hornTempl.rows(), hornTempl.cols(), hornTempl.type());
+        temp.setTo(new Scalar(255,255,255));
+        Core.subtract(temp, hornTempl,hornTempl);
 
+        temp = new Mat(zeroTempl.rows(), zeroTempl.cols(), zeroTempl.type());
+        temp.setTo(new Scalar(255,255,255));
+        Core.subtract(temp, zeroTempl,zeroTempl);
+*/
         difference = new Mat();
         framesTaken = 0;
+
+
+
+        mOpenCvCameraView.setCvCameraViewListener(this);
+        //Toast.makeText(getApplicationContext(),"successfully loaded template(s)",Toast.LENGTH_SHORT).show();
+
     }
 
-    // implementation of OPENCV 'CvCameraViewListener2' methods
     @Override
+    public void onPause()
+    {
+        super.onPause();
+        if (mOpenCvCameraView != null)
+            mOpenCvCameraView.disableView();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (!OpenCVLoader.initDebug()) {
+            Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
+        } else {
+            Log.d(TAG, "OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        }
+    }
+    public void onDestroy() {
+        super.onDestroy();
+        if (mOpenCvCameraView != null)
+            mOpenCvCameraView.disableView();
+    }
+
     public void onCameraViewStarted(int width, int height) {
+
         mRgba = new Mat(height, width, CvType.CV_8UC4);
-        // mRgbaF = new Mat(height, width, CvType.CV_8UC4);
-        // mRgbaT = new Mat(width, width, CvType.CV_8UC4);
+
     }
 
-    @Override
     public void onCameraViewStopped() {
         mRgba.release();
+        //gray.release();
     }
 
     public Core.MinMaxLocResult compare(Mat img, Mat templ){
@@ -152,7 +176,7 @@ public class CameraActivity extends AppCompatActivity
 
     }
 
-    @Override
+
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
 
         mRgba = inputFrame.rgba();
@@ -184,5 +208,101 @@ public class CameraActivity extends AppCompatActivity
         Imgproc.resize(diffT, diffT, difference.size());
 
         return diffT;
+
+        /*
+        Core.MinMaxLocResult hornResult = compare(difference, hornTempl);
+        Core.MinMaxLocResult zeroResult = compare(difference, zeroTempl);
+
+        Point matchLoc;
+        String found;
+
+        //if(hornResult.minVal > -0.5 || zeroResult.minVal > -0.5) return mRgba;
+
+        if(hornResult.minVal < zeroResult.minVal){
+            matchLoc = hornResult.minLoc;
+            found = "horn";
+        }
+        else{
+            matchLoc = zeroResult.minLoc;
+            found = "zero";
+        }
+
+        Imgproc.rectangle(difference, matchLoc, new Point(matchLoc.x + hornTempl.cols(),
+                matchLoc.y + hornTempl.rows()), new Scalar(0, 255, 0));
+
+        Imgproc.putText(difference,found, matchLoc,Core.FONT_HERSHEY_COMPLEX,1.0,new Scalar(255));
+
+        return difference;
+*/
+
+        /*
+        //GRAYSCALE
+
+        gray = inputFrame.gray();
+        mRgba = inputFrame.rgba();
+        mRgb = new Mat();
+
+        Core.flip(grayF, gray, 1);
+        Core.flip(mRgbaF, mRgba, 1);
+
+        Imgproc.cvtColor(mRgbaF, mRgb, Imgproc.COLOR_RGBA2RGB);
+
+        Core.MinMaxLocResult hornResult = compare(mRgb, hornTempl);
+        Core.MinMaxLocResult zeroResult = compare(mRgb, zeroTempl);
+
+        Point matchLoc;
+        String found;
+
+        //if(hornResult.minVal > -0.5 || zeroResult.minVal > -0.5) return mRgba;
+
+        if(hornResult.minVal < zeroResult.minVal){
+            matchLoc = hornResult.minLoc;
+            found = "horn";
+        }
+        else{
+            matchLoc = zeroResult.minLoc;
+            found = "zero";
+        }
+
+        Imgproc.rectangle(mRgb, matchLoc, new Point(matchLoc.x + hornTempl.cols(),
+                matchLoc.y + hornTempl.rows()), new Scalar(0, 255, 0));
+
+        Imgproc.putText(mRgb,found, matchLoc,Core.FONT_HERSHEY_COMPLEX,1.0,new Scalar(255));
+
+        return mRgb;
+
+
+
+        */
+/*
+//COLOUR
+        mRgba = inputFrame.rgba();
+        // Rotate mRgba 90 degrees
+        Core.transpose(mRgba, mRgbaT);
+        Imgproc.resize(mRgbaT, mRgbaF, mRgbaF.size(), 0,0, 0);
+        Core.flip(mRgbaF, mRgba, 1 );
+
+        Core.MinMaxLocResult hornResult = compare(mRgba, hornTempl);
+        Core.MinMaxLocResult zeroResult = compare(mRgba, zeroTempl);
+        Point matchLoc;
+        String found;
+        Mat template;
+        if(hornResult.minVal < zeroResult.minVal){
+            matchLoc = hornResult.minLoc;
+            found = "horn";
+            template = hornTempl;
+        }
+        else{
+            matchLoc = zeroResult.minLoc;
+            found = "zero";
+            template = zeroTempl;
+        }
+
+        Imgproc.rectangle(mRgba, matchLoc, new Point(matchLoc.x + template.cols(),
+                matchLoc.y + template.rows()), new Scalar(0, 255, 0));
+        Imgproc.putText(mRgba,found, matchLoc,Core.FONT_HERSHEY_COMPLEX,1.0,new Scalar(255));
+
+        return mRgba; // This function must return
+*/
     }
 }

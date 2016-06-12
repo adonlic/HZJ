@@ -76,6 +76,7 @@ public class AchievementRepository extends HZJRepository<Achievement>
     @Override
     public void update(int index) {
         // position here is user's ID
+        /*
         Call<Void> call = HZJService.getService().updateUserAchievements(index, achievements);      // <------
         call.enqueue(new Callback<Void>() {
             @Override
@@ -88,5 +89,6 @@ public class AchievementRepository extends HZJRepository<Achievement>
 
             }
         });
+        */
     }
 }

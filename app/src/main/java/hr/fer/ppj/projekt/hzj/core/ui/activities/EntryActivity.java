@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.adapters.ViewPagerAdapter;
+import hr.fer.ppj.projekt.hzj.core.cache.UserCache;
+import hr.fer.ppj.projekt.hzj.core.helpers.UserHelper;
 import hr.fer.ppj.projekt.hzj.core.ui.fragments.LoginFragment;
 import hr.fer.ppj.projekt.hzj.core.ui.fragments.RegisterFragment;
 
@@ -21,6 +24,19 @@ public class EntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
 
+        // if user is logged in already, skip all and go directly to app core
+        if (UserHelper.isLogged()) {
+            Toast
+                    .makeText(this,
+                            "Dobrodošli natrag " + UserCache.getUser().getName() + "!",
+                            Toast.LENGTH_SHORT)
+                    .show();
+            Intent mainActivity = new Intent(this, MainActivity.class);
+            startActivity(mainActivity);
+            finish();
+        }
+
+        // things we need for first screen if user is not logged in
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Dobrodošli u HZJ!");
         setSupportActionBar(toolbar);
@@ -37,7 +53,7 @@ public class EntryActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.settings:
+            case R.id.skip:
                 Intent settings = new Intent(this, MainActivity.class);
                 startActivity(settings);
                 return true;

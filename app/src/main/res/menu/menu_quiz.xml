@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/skip"
+        android:id="@+id/quit_quiz"
         android:orderInCategory="100"
-        android:title="Preskoči"
+        android:title="Odustani"
         app:showAsAction="always|withText"/>
 
 </menu>

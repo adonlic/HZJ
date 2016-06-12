@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.cache.UserCache;
-import hr.fer.ppj.projekt.hzj.core.controllers.UserController;
+import hr.fer.ppj.projekt.hzj.core.helpers.UserHelper;
 import hr.fer.ppj.projekt.hzj.core.ui.activities.MainActivity;
 
 /**
@@ -55,7 +55,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                     && !password.getText().toString().isEmpty()
                     && !name.getText().toString().isEmpty()
                     && !surname.getText().toString().isEmpty())
-                UserController.tryToRegisterNew(this,
+                UserHelper.tryToRegisterNew(this,
                         username.getText().toString(), password.getText().toString(),
                         name.getText().toString(), surname.getText().toString());
             else

@@ -17,11 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.camera.ui.CameraActivity;
 import hr.fer.ppj.projekt.hzj.core.adapters.ViewPagerAdapter;
+import hr.fer.ppj.projekt.hzj.core.cache.UserCache;
 import hr.fer.ppj.projekt.hzj.core.repositories.implementations.HZJContext;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import hr.fer.ppj.projekt.hzj.core.ui.fragments.FavoritesFragment;
@@ -101,7 +103,10 @@ public class MainActivity extends AppCompatActivity {
         // setting custom toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("HRVATSKI ZNAKOVNI JEZIK");
-        toolbar.setSubtitle("gost");
+        if (UserCache.getUser() == null)
+            toolbar.setSubtitle("Ulogirani ste kao: gost");
+        else
+            toolbar.setSubtitle("Ulogirani ste kao: " + UserCache.getUser().getUsername());
         // bind custom toolbar to this activity
         setSupportActionBar(toolbar);
         // getSupportActionBar().setHomeButtonEnabled(true);
@@ -248,6 +253,15 @@ public class MainActivity extends AppCompatActivity {
         int imageIconColor = ContextCompat.getColor(
                 getBaseContext(), R.color.colorPrimaryDark);
         imageView.setColorFilter(imageIconColor, PorterDuff.Mode.SRC_IN);
+
+        // setup basic user details (info)
+        TextView nameAndSurname = (TextView) findViewById(R.id.name_and_surname);
+        TextView username = (TextView) findViewById(R.id.username);
+        if (UserCache.getUser() != null) {
+            nameAndSurname.setText(UserCache.getUser().getName() + " "
+                    + UserCache.getUser().getSurname());
+            username.setText(UserCache.getUser().getUsername());
+        }
     }
 
     private void setupAPI() {

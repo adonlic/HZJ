@@ -1,6 +1,7 @@
 package hr.fer.ppj.projekt.hzj.core.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import java.util.List;
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.models.business.Quiz;
 import hr.fer.ppj.projekt.hzj.core.services.ImageManager;
+import hr.fer.ppj.projekt.hzj.core.ui.activities.QuizVideosActivity;
+import hr.fer.ppj.projekt.hzj.core.ui.activities.VideosActivity;
 
 /**
  * Created by ANTE on 22.5.2016..
@@ -43,6 +46,7 @@ public class QuizzesRecyclerAdapter
     public void onBindViewHolder(QuizViewHolder holder, int position) {
         Quiz currentQuiz = quizzes.get(position);
         holder.setData(currentQuiz, position);
+        holder.setListeners();
     }
 
     @Override
@@ -61,7 +65,15 @@ public class QuizzesRecyclerAdapter
         notifyDataSetChanged();
     }
 
-    class QuizViewHolder extends RecyclerView.ViewHolder {
+    public void getSectionVideos(int position) {
+        Intent intent = new Intent(this.activityContext, QuizVideosActivity.class);  // ili uzeti context roditelja fragmenta...
+        intent.putExtra("QuizID", this.quizzes.get(position).getId());
+        intent.putExtra("QuizName", this.quizzes.get(position).getTitle());
+        activityContext.startActivity(intent);
+        // Log.i("start activity id=", String.valueOf(current.getId()));
+    }
+
+    class QuizViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title, description;
         private ImageView backgroundImage;
         private int position;
@@ -85,6 +97,23 @@ public class QuizzesRecyclerAdapter
                     .into(this.backgroundImage);
             this.position = position;
             this.current = currentQuiz;
+        }
+
+        public void setListeners() {
+            this.backgroundImage.setOnClickListener(QuizViewHolder.this);
+            this.title.setOnClickListener(QuizViewHolder.this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.image_quiz:
+                    getSectionVideos(position);
+                    break;
+                case R.id.title_of_quiz:
+                    getSectionVideos(position);
+                    break;
+            }
         }
     }
 }

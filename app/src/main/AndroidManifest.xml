@@ -39,9 +39,7 @@
         android:theme="@style/MaterialTheme">
         <activity
             android:name=".core.ui.activities.MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".core.ui.activities.SettingsActivity"
             android:parentActivityName=".core.ui.activities.MainActivity"
@@ -62,6 +60,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".core.ui.activities.QuizVideosActivity"></activity>
     </application>
 
 </manifest>

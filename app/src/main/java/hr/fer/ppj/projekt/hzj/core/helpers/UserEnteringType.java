@@ -1,4 +1,4 @@
-package hr.fer.ppj.projekt.hzj.core.controllers;
+package hr.fer.ppj.projekt.hzj.core.helpers;
 
 /**
  * Created by ANTE on 11.6.2016..

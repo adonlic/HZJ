@@ -46,7 +46,7 @@
         android:layout_marginTop="15dp"
         android:layout_below="@+id/profile_picture"
         android:text="STATISTIKA:"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorBackground"/>
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="15dp"
         android:layout_below="@+id/statistic_text"
-        android:background="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorBackground"/>
 
     <TextView
         android:id="@+id/speed_of_decision"
@@ -65,7 +65,7 @@
         android:layout_marginTop="2dp"
         android:text="brzina odlučivanja"
         android:layout_below="@id/line"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorBackground"/>
     <TextView
         android:id="@+id/speed_of_decision_value"
         android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
         android:text="4.5/5"
         android:layout_below="@id/line"
         android:layout_alignParentRight="true"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorBackground"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
         android:layout_marginLeft="15dp"
         android:text="spremnost"
         android:layout_below="@id/speed_of_decision"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorBackground"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
         android:text="3.2/5"
         android:layout_below="@id/speed_of_decision"
         android:layout_alignParentRight="true"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorBackground"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
         android:text="ocjena"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorBackground"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,6 +109,6 @@
         android:layout_marginBottom="15dp"
         android:text="4.5/5"
         android:layout_alignParentRight="true"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorBackground"/>
 
 </RelativeLayout>

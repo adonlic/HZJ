@@ -1,7 +1,6 @@
 package hr.fer.ppj.projekt.hzj.core.ui.fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,14 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.cache.UserCache;
-import hr.fer.ppj.projekt.hzj.core.controllers.UserController;
+import hr.fer.ppj.projekt.hzj.core.helpers.UserHelper;
 import hr.fer.ppj.projekt.hzj.core.models.business.User;
-import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import hr.fer.ppj.projekt.hzj.core.ui.activities.MainActivity;
 
 /**
@@ -53,7 +50,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, ILo
         if (v.getId() == R.id.login) {
             if (!username.getText().toString().isEmpty()
                     && !password.getText().toString().isEmpty())
-                UserController.tryToLogin(this,
+                UserHelper.tryToLogin(this,
                         username.getText().toString(), password.getText().toString());
             else
                 Toast

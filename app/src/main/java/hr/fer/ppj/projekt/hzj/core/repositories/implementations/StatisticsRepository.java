@@ -74,6 +74,7 @@ public class StatisticsRepository extends HZJRepository<Statistics>
 
     @Override
     public void update(int index) {
+        /*
         Call<Void> call = HZJService.getService().updateUserStatistics(index, null);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -86,5 +87,6 @@ public class StatisticsRepository extends HZJRepository<Statistics>
 
             }
         });
+        */
     }
 }

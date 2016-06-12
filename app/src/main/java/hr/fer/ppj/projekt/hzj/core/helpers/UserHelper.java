@@ -1,4 +1,4 @@
-package hr.fer.ppj.projekt.hzj.core.controllers;
+package hr.fer.ppj.projekt.hzj.core.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,8 +9,10 @@ import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.cache.UserCache;
 import hr.fer.ppj.projekt.hzj.core.models.app.HZJApplication;
 import hr.fer.ppj.projekt.hzj.core.models.business.Achievement;
+import hr.fer.ppj.projekt.hzj.core.models.business.QuizResult;
 import hr.fer.ppj.projekt.hzj.core.models.business.Statistics;
 import hr.fer.ppj.projekt.hzj.core.models.business.User;
+import hr.fer.ppj.projekt.hzj.core.models.business.Video;
 import hr.fer.ppj.projekt.hzj.core.models.business.helper.UserCredentials;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import hr.fer.ppj.projekt.hzj.core.ui.fragments.ILogin;
@@ -22,10 +24,10 @@ import retrofit2.Response;
 /**
  * Created by ANTE on 11.6.2016..
  */
-public class UserController {
-    private Context context = HZJApplication.getContext();
+public class UserHelper {
+    private static Context context = HZJApplication.getContext();
 
-    public boolean isLogged() {
+    public static boolean isLogged() {
         SharedPreferences userPref = context.getSharedPreferences(
                 context.getString(R.string.preference_user), Context.MODE_PRIVATE
         );
@@ -36,7 +38,7 @@ public class UserController {
             int userId = getUser();
 
             // now when we have user id, we use it for getting user from API...
-            getLoggedUser(userId);
+            UserHelper.getLoggedUser(userId);
 
             return true;
         }
@@ -44,12 +46,12 @@ public class UserController {
         return false;
     }
 
-    private int getUser() {
+    private static int getUser() {
         SharedPreferences userPref = context.getSharedPreferences(
                 context.getString(R.string.preference_user), Context.MODE_PRIVATE
         );
 
-        return userPref.getInt("Id", 0);
+        return userPref.getInt("ID", 0);
     }
 
     public static void tryToLogin(final ILogin loginFragment,
@@ -126,12 +128,13 @@ public class UserController {
         });
     }
 
-    public static void getUserStats(int id) {
-        Call<List<Statistics>> call = HZJService.getService().getUserStatistics(id);
+    public static void getUserStats() {
+        Call<List<Statistics>> call = HZJService.getService()
+                .getUserStatistics(UserCache.getUser().getId());
         call.enqueue(new Callback<List<Statistics>>() {
             @Override
             public void onResponse(Call<List<Statistics>> call, Response<List<Statistics>> response) {
-
+                UserCache.getUser().setStatisticsList(response.body());
             }
 
             @Override
@@ -141,29 +144,13 @@ public class UserController {
         });
     }
 
-    public static void postUserStats(int id) {
-
-
-        Call<Void> call = HZJService.getService().updateUserStatistics(id, null);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
-            }
-        });
-    }
-
-    public static void getUserAchievements(int id) {
-        Call<List<Achievement>> call = HZJService.getService().getUserAchievements(id);
+    public static void getUserAchievements() {
+        Call<List<Achievement>> call = HZJService.getService()
+                .getUserAchievements(UserCache.getUser().getId());
         call.enqueue(new Callback<List<Achievement>>() {
             @Override
             public void onResponse(Call<List<Achievement>> call, Response<List<Achievement>> response) {
-
+                UserCache.getUser().setAchievementList(response.body());
             }
 
             @Override
@@ -174,10 +161,85 @@ public class UserController {
     }
 
     public static void getUserQuizResults() {
+        Call<List<QuizResult>> call = HZJService.getService()
+                .getUserQuizResults(UserCache.getUser().getId());
+        call.enqueue(new Callback<List<QuizResult>>() {
+            @Override
+            public void onResponse(Call<List<QuizResult>> call, Response<List<QuizResult>> response) {
+                UserCache.getUser().setQuizResultList(response.body());
+            }
 
+            @Override
+            public void onFailure(Call<List<QuizResult>> call, Throwable t) {
+
+            }
+        });
     }
 
     public static void getUserFavorites() {
+        Call<List<Video>> call = HZJService.getService()
+                .getUserFavorites(UserCache.getUser().getId());
+        call.enqueue(new Callback<List<Video>>() {
+            @Override
+            public void onResponse(Call<List<Video>> call, Response<List<Video>> response) {
+                // UserCache.getUser().setFavoriteList(response.body());
+            }
 
+            @Override
+            public void onFailure(Call<List<Video>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public static void postUserStats() {
+        Call<Boolean> call = HZJService.getService()
+                .updateUserStatistics(UserCache.getUser().getId(),
+                        UserCache.getUser().getStatisticsList());
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public static void postUserAchievements() {
+        Call<Boolean> call = HZJService.getService()
+                .updateUserAchievements(UserCache.getUser().getId(),
+                        UserCache.getUser().getAchievementList());
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public static void postUserQuizResults(int quizId, int numberOfGood) {
+        Call<Boolean> call = HZJService.getService()
+                .updateUserQuizResult(UserCache.getUser().getId(),
+                        quizId, numberOfGood);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
     }
 }

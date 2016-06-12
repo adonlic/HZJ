@@ -53,15 +53,15 @@ public interface HZJEndpoint {
     @GET("korisnik/statistika/{id}")
     Call<List<Statistics>> getUserStatistics(@Path("id") int userId);                               // goes in StatisticsRepository
     @POST("korisnik/statistika/{id}")
-    Call<Void> updateUserStatistics(@Path("id") int userId, @Body List<Statistics> userStats);                                        // goes online
+    Call<Boolean> updateUserStatistics(@Path("id") int userId, @Body List<Statistics> userStats);                                        // goes online
     @GET("korisnik/postignuce/{id}")
     Call<List<Achievement>> getUserAchievements(@Path("id") int userId);                            // goes in AchievementRepository
     @POST("korisnik/postignuce/{id}")
-    Call<Void> updateUserAchievements(@Path("id") int userId, @Body List<Achievement> achievements);// goes online
+    Call<Boolean> updateUserAchievements(@Path("id") int userId, @Body List<Achievement> achievements);// goes online
     @GET("korisnik/kvizovi/{id}")
     Call<List<QuizResult>> getUserQuizResults(@Path("id") int userId);                              // goes in QuizResultRepository
     @POST("korisnik/rezultat_kviza/{id}/{kviz_id}/{broj_savladanih}")
-    Call<Void> updateUserQuizResult(@Path("id") int userId, @Path("kviz_id") int quizId,
+    Call<Boolean> updateUserQuizResult(@Path("id") int userId, @Path("kviz_id") int quizId,
                             @Path("broj_savladanih") int number);                                   // goes online
     // add or remove selected video to/from favorites by user's command
     @GET("korisnik/favoriti/{id}")

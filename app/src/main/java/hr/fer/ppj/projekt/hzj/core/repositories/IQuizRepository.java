@@ -2,7 +2,7 @@ package hr.fer.ppj.projekt.hzj.core.repositories;
 
 import java.util.List;
 
-import hr.fer.ppj.projekt.hzj.core.models.Quiz;
+import hr.fer.ppj.projekt.hzj.core.models.business.Quiz;
 
 /**
  * Created by ANTE on 21.5.2016..

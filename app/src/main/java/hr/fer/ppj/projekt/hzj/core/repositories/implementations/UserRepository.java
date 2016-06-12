@@ -2,7 +2,7 @@ package hr.fer.ppj.projekt.hzj.core.repositories.implementations;
 
 import android.content.Context;
 
-import hr.fer.ppj.projekt.hzj.core.models.User;
+import hr.fer.ppj.projekt.hzj.core.models.business.User;
 import hr.fer.ppj.projekt.hzj.core.repositories.IUserRepository;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import retrofit2.Call;

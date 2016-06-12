@@ -4,20 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="hr.fer.ppj.projekt.hzj.core.ui.activities.LoginActivity">
+    tools:context="hr.fer.ppj.projekt.hzj.core.ui.activities.EntryActivity">
 
     <TextView
-        android:id="@+id/login_title"
+        android:id="@+id/register_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:layout_above="@+id/login_card_view"
+        android:layout_above="@+id/register_card_view"
         android:textSize="24sp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@android:color/white"
         android:layout_centerHorizontal="true"
-        android:text="LOGIN" />
+        android:text="REGISTRIRACIJA" />
     <include
-        android:id="@+id/login_card_view"
-        layout="@layout/login_card_view"/>
+        android:id="@+id/register_card_view"
+        layout="@layout/register_card_view"/>
 
 </RelativeLayout>

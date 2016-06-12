@@ -1,13 +1,7 @@
 package hr.fer.ppj.projekt.hzj.core.services;
 
-import android.app.Application;
-import android.content.Context;
-import android.util.Log;
-
-import hr.fer.ppj.projekt.hzj.R;
-import hr.fer.ppj.projekt.hzj.core.models.Quiz;
-import hr.fer.ppj.projekt.hzj.core.models.Section;
-import hr.fer.ppj.projekt.hzj.core.models.Video;
+import hr.fer.ppj.projekt.hzj.core.models.business.Quiz;
+import hr.fer.ppj.projekt.hzj.core.models.business.Section;
 
 /**
  * Created by ANTE on 23.5.2016..

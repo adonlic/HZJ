@@ -1,4 +1,4 @@
-package hr.fer.ppj.projekt.hzj.core.models;
+package hr.fer.ppj.projekt.hzj.core.models.business;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -29,7 +29,7 @@ public class User {
     // in database attribute 'active' is type of 'bit'
     @SerializedName("Aktivan")
     @Expose
-    private int active;
+    private boolean active;
     @SerializedName("USustavuOd")
     @Expose
     private Date inSystemFrom;
@@ -84,11 +84,11 @@ public class User {
         this.surname = surname;
     }
 
-    public int getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
@@ -147,7 +147,7 @@ public class User {
     }
 
     public User(int id, String username, String password, String name, String surname,
-                int active, Date inSystemFrom, Date lastActivity) {
+                boolean active, Date inSystemFrom, Date lastActivity) {
         this.id = id;
         this.username = username;
         this.password = password;

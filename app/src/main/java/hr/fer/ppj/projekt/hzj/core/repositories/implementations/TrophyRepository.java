@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.fer.ppj.projekt.hzj.core.models.Trophy;
+import hr.fer.ppj.projekt.hzj.core.models.business.Trophy;
 import hr.fer.ppj.projekt.hzj.core.repositories.ITrophyRepository;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import retrofit2.Call;

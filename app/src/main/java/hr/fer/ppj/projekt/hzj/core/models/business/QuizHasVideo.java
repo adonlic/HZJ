@@ -1,4 +1,4 @@
-package hr.fer.ppj.projekt.hzj.core.models;
+package hr.fer.ppj.projekt.hzj.core.models.business;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

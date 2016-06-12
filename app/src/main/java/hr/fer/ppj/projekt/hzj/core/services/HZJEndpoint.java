@@ -2,17 +2,17 @@ package hr.fer.ppj.projekt.hzj.core.services;
 
 import java.util.List;
 
-import hr.fer.ppj.projekt.hzj.core.models.Achievement;
-import hr.fer.ppj.projekt.hzj.core.models.Favorite;
-import hr.fer.ppj.projekt.hzj.core.models.Hardness;
-import hr.fer.ppj.projekt.hzj.core.models.Quiz;
-import hr.fer.ppj.projekt.hzj.core.models.QuizResult;
-import hr.fer.ppj.projekt.hzj.core.models.Section;
-import hr.fer.ppj.projekt.hzj.core.models.Statistics;
-import hr.fer.ppj.projekt.hzj.core.models.StatisticsType;
-import hr.fer.ppj.projekt.hzj.core.models.Trophy;
-import hr.fer.ppj.projekt.hzj.core.models.User;
-import hr.fer.ppj.projekt.hzj.core.models.Video;
+import hr.fer.ppj.projekt.hzj.core.models.business.Achievement;
+import hr.fer.ppj.projekt.hzj.core.models.business.Hardness;
+import hr.fer.ppj.projekt.hzj.core.models.business.Quiz;
+import hr.fer.ppj.projekt.hzj.core.models.business.QuizResult;
+import hr.fer.ppj.projekt.hzj.core.models.business.Section;
+import hr.fer.ppj.projekt.hzj.core.models.business.Statistics;
+import hr.fer.ppj.projekt.hzj.core.models.business.StatisticsType;
+import hr.fer.ppj.projekt.hzj.core.models.business.Trophy;
+import hr.fer.ppj.projekt.hzj.core.models.business.User;
+import hr.fer.ppj.projekt.hzj.core.models.business.Video;
+import hr.fer.ppj.projekt.hzj.core.models.business.helper.UserCredentials;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -33,20 +33,27 @@ public interface HZJEndpoint {
     // USER(ACCOUNT) ENDPOINTS (users)
     // create user(account), get current user(account) info, deactivate current user(account)
     @POST("korisnik/novi")
-    Call<Void> createNewUser(@Body User user);                                                      // goes online
-    @GET("korisnik/{id}")
+    Call<Boolean> createNewUser(@Body User user);                                                      // goes online
+    @GET("korisnik/Index/{id}")
     Call<User> getUserInfo(@Path("id") int userId);                                                 // goes in UserRepository
-    @POST("korisnik/{id}")
+    // update user data
+    @POST("korisnik/azuriraj/{id}")
     Call<Void> updateUserInfo(@Path("id") int userId);                                              // goes online
+    // deaktivacija means logout...
     @POST("korisnik/deaktivacija/{id}")
     Call<Void> deactivateUser(@Path("id") int userId);                                              // goes online
+    // login from GET to POST???
+    @POST("korisnik/GetUser")  // NOT PROTECTED! ;)
+    Call<User> login(@Body UserCredentials credentials);
+    // Call<User> login(@Path("username") String username, @Path("password") String password);
     // all statistics is created for user and set to zero by default so we can push all
     // even when small change occurred...same thing for achievements...
     // update user's quiz progress and with it total progress (statistics) - statistics is cascade
+    // adds or updates existing statistics
     @GET("korisnik/statistika/{id}")
     Call<List<Statistics>> getUserStatistics(@Path("id") int userId);                               // goes in StatisticsRepository
     @POST("korisnik/statistika/{id}")
-    Call<Void> updateUserStatistics(@Path("id") int userId);                                        // goes online
+    Call<Void> updateUserStatistics(@Path("id") int userId, @Body List<Statistics> userStats);                                        // goes online
     @GET("korisnik/postignuce/{id}")
     Call<List<Achievement>> getUserAchievements(@Path("id") int userId);                            // goes in AchievementRepository
     @POST("korisnik/postignuce/{id}")
@@ -61,7 +68,8 @@ public interface HZJEndpoint {
     Call<List<Video>> getUserFavorites(@Path("id") int userId);                                     // goes in FavoriteRepository
     @POST("korisnik/favorit/{id}/{video_id}")
     Call<Void> addFavoriteVideo(@Path("id") int userId, @Path("video_id") int videoId);             // goes online
-    @DELETE("korisnik/favorit/{id}/{video_id}")
+    // if exists this favorite, with post we erase it, if doesn't...add it to user...
+    @POST("korisnik/favorit/{id}/{video_id}")
     Call<Void> removeFavoriteVideo(@Path("id") int userId, @Path("video_id") int videoId);
 
 
@@ -83,7 +91,7 @@ public interface HZJEndpoint {
     // ##################### OPTIONAL #####################
     @GET("trofeji")
     Call<List<Trophy>> getTrophies();                                                               // goes in TrophyRepository
-    @GET("statistike")
+    @GET("tipStatistike")
     Call<List<StatisticsType>> getStatisticsTypes();                                                // goes in StatisticsTypeRepository
     @GET("tezina")
     Call<List<Hardness>> getHardnesses();                                                           // goes in HardnessRepository

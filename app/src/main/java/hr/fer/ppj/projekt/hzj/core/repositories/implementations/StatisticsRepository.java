@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.fer.ppj.projekt.hzj.core.models.Statistics;
+import hr.fer.ppj.projekt.hzj.core.models.business.Statistics;
 import hr.fer.ppj.projekt.hzj.core.repositories.IStatisticsRepository;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import retrofit2.Call;
@@ -74,7 +74,7 @@ public class StatisticsRepository extends HZJRepository<Statistics>
 
     @Override
     public void update(int index) {
-        Call<Void> call = HZJService.getService().updateUserStatistics(index);
+        Call<Void> call = HZJService.getService().updateUserStatistics(index, null);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

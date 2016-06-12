@@ -17,7 +17,7 @@ import java.util.List;
 
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.adapters.QuizzesRecyclerAdapter;
-import hr.fer.ppj.projekt.hzj.core.models.Quiz;
+import hr.fer.ppj.projekt.hzj.core.models.business.Quiz;
 import hr.fer.ppj.projekt.hzj.core.repositories.implementations.HZJContext;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import retrofit2.Call;

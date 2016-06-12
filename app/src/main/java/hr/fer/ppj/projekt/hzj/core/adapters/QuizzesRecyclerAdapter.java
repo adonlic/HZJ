@@ -2,7 +2,6 @@ package hr.fer.ppj.projekt.hzj.core.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hr.fer.ppj.projekt.hzj.R;
-import hr.fer.ppj.projekt.hzj.core.models.Quiz;
-import hr.fer.ppj.projekt.hzj.core.models.Section;
+import hr.fer.ppj.projekt.hzj.core.models.business.Quiz;
 import hr.fer.ppj.projekt.hzj.core.services.ImageManager;
 
 /**

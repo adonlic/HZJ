@@ -1,6 +1,5 @@
-package hr.fer.ppj.projekt.hzj.core.models;
+package hr.fer.ppj.projekt.hzj.core.models.business;
 
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 import com.google.gson.annotations.Expose;
@@ -126,8 +125,11 @@ public class Video {
 
     // methods
     // we get videos in most part of app as list, only when we click one we send request to download
-    public void downloadVideoFromURL() {
+    /*
+    public void formatVideoURL() {
         String neki_url = "";
-        this.downloadedVideo = Uri.parse(neki_url + this.url);
+        // this.downloadedVideo = Uri.parse(neki_url + this.url);
+        this.url = "162.243.210.30/videos/" + url;
     }
+    */
 }

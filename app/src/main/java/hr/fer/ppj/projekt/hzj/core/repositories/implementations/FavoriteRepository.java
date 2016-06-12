@@ -5,9 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.fer.ppj.projekt.hzj.core.models.Favorite;
-import hr.fer.ppj.projekt.hzj.core.models.Video;
-import hr.fer.ppj.projekt.hzj.core.repositories.IFavoriteRepository;
+import hr.fer.ppj.projekt.hzj.core.models.business.Video;
 import hr.fer.ppj.projekt.hzj.core.repositories.IVideoRepository;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import retrofit2.Call;

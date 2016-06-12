@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.fer.ppj.projekt.hzj.core.models.Quiz;
+import hr.fer.ppj.projekt.hzj.core.models.business.Quiz;
 import hr.fer.ppj.projekt.hzj.core.repositories.IQuizRepository;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import retrofit2.Call;

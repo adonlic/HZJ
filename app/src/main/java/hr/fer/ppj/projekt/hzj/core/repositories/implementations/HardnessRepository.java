@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.fer.ppj.projekt.hzj.core.models.Hardness;
+import hr.fer.ppj.projekt.hzj.core.models.business.Hardness;
 import hr.fer.ppj.projekt.hzj.core.repositories.IHardnessRepository;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import retrofit2.Call;

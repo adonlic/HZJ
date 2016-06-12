@@ -10,17 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import hr.fer.ppj.projekt.hzj.R;
-import hr.fer.ppj.projekt.hzj.core.models.Section;
-import hr.fer.ppj.projekt.hzj.core.models.Video;
-import hr.fer.ppj.projekt.hzj.core.services.ImageManager;
+import hr.fer.ppj.projekt.hzj.core.models.business.Video;
 import hr.fer.ppj.projekt.hzj.core.ui.activities.PlayVideoActivity;
-import hr.fer.ppj.projekt.hzj.core.ui.activities.VideosActivity;
 
 /**
  * Created by ANTE on 22.5.2016..

@@ -1,15 +1,13 @@
 package hr.fer.ppj.projekt.hzj.core.repositories.implementations;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.fer.ppj.projekt.hzj.core.models.Section;
+import hr.fer.ppj.projekt.hzj.core.models.business.Section;
 import hr.fer.ppj.projekt.hzj.core.repositories.ISectionRepository;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
-import hr.fer.ppj.projekt.hzj.core.services.ImageManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

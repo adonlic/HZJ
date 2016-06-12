@@ -5,18 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.List;
 
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.adapters.FavoritesRecyclerAdapter;
-import hr.fer.ppj.projekt.hzj.core.models.Video;
+import hr.fer.ppj.projekt.hzj.core.models.business.Video;
 import hr.fer.ppj.projekt.hzj.core.repositories.implementations.HZJContext;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import retrofit2.Call;

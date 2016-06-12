@@ -1,16 +1,14 @@
-package hr.fer.ppj.projekt.hzj.core.models;
+package hr.fer.ppj.projekt.hzj.core.models.business;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 /**
  * Created by ANTE on 20.5.2016..
  */
 
 // PRESJECNA TABLICA (ima surogat kljuc 'ID')
-public class Achievement {
+public class Statistics {
     // private fields
     @SerializedName("ID")
     @Expose
@@ -18,13 +16,16 @@ public class Achievement {
     @SerializedName("KorisnikID")
     @Expose
     private int userId;
-    @SerializedName("TrofejID")
+    @SerializedName("TipStatistikeID")
     @Expose
-    private int trophyId;
+    private int statisticsTypeId;
+    @SerializedName("Vrijednost")
+    @Expose
+    private double value;
 
     // references to other tables
     private User user;
-    private Trophy trophy;
+    private StatisticsType statisticsType;
 
     // getters and setters
     public int getId() {
@@ -43,12 +44,20 @@ public class Achievement {
         this.userId = userId;
     }
 
-    public int getTrophyId() {
-        return trophyId;
+    public int getStatisticsTypeId() {
+        return statisticsTypeId;
     }
 
-    public void setTrophyId(int trophyId) {
-        this.trophyId = trophyId;
+    public void setStatisticsTypeId(int statisticsTypeId) {
+        this.statisticsTypeId = statisticsTypeId;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 
     // getters and setters for references
@@ -60,22 +69,23 @@ public class Achievement {
         this.user = user;
     }
 
-    public Trophy getTrophy() {
-        return trophy;
+    public StatisticsType getStatisticsType() {
+        return statisticsType;
     }
 
-    public void setTrophy(Trophy trophy) {
-        this.trophy = trophy;
+    public void setStatisticsType(StatisticsType statisticsType) {
+        this.statisticsType = statisticsType;
     }
 
     // constructors
-    public Achievement() {
+    public Statistics() {
 
     }
 
-    public Achievement(int id, int userId, int trophyId) {
+    public Statistics(int id, int userId, int statisticsTypeId, double value) {
         this.id = id;
         this.userId = userId;
-        this.trophyId = trophyId;
+        this.statisticsTypeId = statisticsTypeId;
+        this.value = value;
     }
 }

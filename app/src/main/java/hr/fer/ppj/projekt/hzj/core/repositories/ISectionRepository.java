@@ -1,6 +1,6 @@
 package hr.fer.ppj.projekt.hzj.core.repositories;
 
-import hr.fer.ppj.projekt.hzj.core.models.Section;
+import hr.fer.ppj.projekt.hzj.core.models.business.Section;
 
 /**
  * Created by ANTE on 21.5.2016..

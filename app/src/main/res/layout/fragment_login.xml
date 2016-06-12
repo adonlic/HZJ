@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="hr.fer.ppj.projekt.hzj.core.ui.activities.EntryActivity">
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@+id/login_card_view"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:text="PRIJAVA" />
+    <include
+        android:id="@+id/login_card_view"
+        layout="@layout/login_card_view"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_card_view"
+        android:layout_alignLeft="@id/login_card_view"
+        android:layout_marginTop="15dp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold|italic"
+        android:text="Nemate korisnički račun? - skrenite udesno"/>
+
+</RelativeLayout>

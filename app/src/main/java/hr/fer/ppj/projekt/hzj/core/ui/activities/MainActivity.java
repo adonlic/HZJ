@@ -23,7 +23,9 @@ import android.widget.Toast;
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.camera.ui.CameraActivity;
 import hr.fer.ppj.projekt.hzj.core.adapters.ViewPagerAdapter;
+import hr.fer.ppj.projekt.hzj.core.cache.QuizzesCache;
 import hr.fer.ppj.projekt.hzj.core.cache.UserCache;
+import hr.fer.ppj.projekt.hzj.core.helpers.QuizHelper;
 import hr.fer.ppj.projekt.hzj.core.repositories.implementations.HZJContext;
 import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 import hr.fer.ppj.projekt.hzj.core.ui.fragments.FavoritesFragment;
@@ -50,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     // RETROFIT (CONSUMING WEB API) - we need it here for loading user's data
     HZJService HZJService;
     HZJContext dataContext;
+
+    SectionsFragment sections;
+    QuizzesFragment quizzes;
+    FavoritesFragment favorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +148,16 @@ public class MainActivity extends AppCompatActivity {
                 // tabLayout.getSelectedTabPosition(), true....
                 // Toast.makeText(getBaseContext(), "TAB ID = " + tabLayout.getSelectedTabPosition(), Toast.LENGTH_LONG).show();   // TOAST¨!!!!!
                 // Log.i("TAB " + tab.getText(), "onTabSelected()");
+
+                // if to fill with data, fill...
+                /*
+                if (tab.getPosition() == 0)
+                    sections.fillWithData();
+                else if (tab.getPosition() == 1)
+                    quizzes.fillWithData();
+                else if (tab.getPosition() == 2)
+                    favorites.fillWithData();
+                    */
             }
 
             @Override
@@ -180,17 +196,9 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // setting reference to data storage
-        SectionsFragment sections = new SectionsFragment();
-        QuizzesFragment quizzes = new QuizzesFragment();
-        FavoritesFragment favorites = new FavoritesFragment();
-        // Log.w("Fragment ->", "initialization");
-        sections.dataContextReference(dataContext);
-        quizzes.dataContextReference(dataContext);
-        favorites.dataContextReference(dataContext);
-
-        sections.referenceParentContext(this);
-        quizzes.referenceParentContext(this);
-        favorites.referenceParentContext(this);
+        sections = new SectionsFragment();
+        quizzes = new QuizzesFragment();
+        favorites = new FavoritesFragment();
 
         // bind fragments to adapter that'll control positioning and so...
         viewPagerAdapter.addFragment(sections, "Nauči me");

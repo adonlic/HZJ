@@ -7,18 +7,23 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.adapters.ViewPagerAdapter;
+import hr.fer.ppj.projekt.hzj.core.cache.QuizzesCache;
+import hr.fer.ppj.projekt.hzj.core.helpers.IObserver;
+import hr.fer.ppj.projekt.hzj.core.helpers.QuizHelper;
+import hr.fer.ppj.projekt.hzj.core.models.business.Video;
 import hr.fer.ppj.projekt.hzj.core.repositories.implementations.HZJContext;
 import hr.fer.ppj.projekt.hzj.core.ui.fragments.LoginFragment;
 import hr.fer.ppj.projekt.hzj.core.ui.fragments.QuizVideosFragment;
 import hr.fer.ppj.projekt.hzj.core.ui.fragments.RegisterFragment;
 
-public class QuizVideosActivity extends AppCompatActivity {
+public class QuizVideosActivity extends AppCompatActivity implements IObserver {
     Toolbar toolbar;
-    HZJContext dataContext;
     int id;
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +32,8 @@ public class QuizVideosActivity extends AppCompatActivity {
 
         // Bundle bundle = getIntent().getExtras();
         Intent intent = getIntent();
-        dataContext = new HZJContext(this);
         id = intent.getIntExtra("QuizID", 0);    // 0 is default
-        // Log.i("sectionID = ", String.valueOf(id));
-        // dataContext.Quizzes().fetchAt(id);
+
         setupToolbar(intent.getStringExtra("QuizName"));
         setupSlidingView();
     }
@@ -63,14 +66,37 @@ public class QuizVideosActivity extends AppCompatActivity {
 
     private void setupSlidingView() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.quiz_videos_view_pager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        // QUIZ VIDEOS FRAGMENTS
-        QuizVideosFragment quizVideosFragment1 = new QuizVideosFragment();
-        QuizVideosFragment quizVideosFragment2 = new QuizVideosFragment();
-
-        viewPagerAdapter.addFragment(quizVideosFragment1, "Video 1");
-        viewPagerAdapter.addFragment(quizVideosFragment2, "Video 2");
         viewPager.setAdapter(viewPagerAdapter);
+
+        QuizHelper.fetchQuizVideos(this, id);
+    }
+
+    @Override
+    public void notifyDownloaded(boolean successful) {
+        if (successful) {
+            // CREATE QUIZ VIDEOS FRAGMENTS
+            for (int i = 0; i < QuizzesCache.getQuizVideos(id).size(); i++) {
+                QuizVideosFragment quizVideosFragment = new QuizVideosFragment();
+                quizVideosFragment.setVideo(QuizzesCache.getQuizVideos(id).get(i));
+
+                // if it's last one, offer option to finish it...
+                if (i == QuizzesCache.getQuizVideos(id).size() - 1)
+                    quizVideosFragment.isLast(true);
+
+                viewPagerAdapter.addFragment(
+                        quizVideosFragment, "Video \'" +
+                                QuizzesCache.getQuizVideos(id).get(i).getName() + "\'");
+            }
+
+            viewPagerAdapter.notifyDataSetChanged();
+        }
+        else
+            Toast
+                    .makeText(this,
+                            "Nešto je pošlo po zlu ili nema traženog podatka...",
+                            Toast.LENGTH_SHORT)
+                    .show();
     }
 }

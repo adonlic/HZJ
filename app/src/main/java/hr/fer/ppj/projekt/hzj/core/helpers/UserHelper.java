@@ -176,7 +176,7 @@ public class UserHelper {
         });
     }
 
-    public static void getUserFavorites() {
+    public static void fetchUserFavorites(IObserver observer) {
         Call<List<Video>> call = HZJService.getService()
                 .getUserFavorites(UserCache.getUser().getId());
         call.enqueue(new Callback<List<Video>>() {

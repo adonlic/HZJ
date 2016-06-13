@@ -18,7 +18,6 @@ import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.models.business.Quiz;
 import hr.fer.ppj.projekt.hzj.core.services.ImageManager;
 import hr.fer.ppj.projekt.hzj.core.ui.activities.QuizVideosActivity;
-import hr.fer.ppj.projekt.hzj.core.ui.activities.VideosActivity;
 
 /**
  * Created by ANTE on 22.5.2016..

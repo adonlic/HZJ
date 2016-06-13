@@ -96,4 +96,8 @@ public interface HZJEndpoint {
     @GET("tezina")
     Call<List<Hardness>> getHardnesses();                                                           // goes in HardnessRepository
 
+
+    // get all video names
+    @GET("video/getNames")
+    Call<List<Video>> getVideoNames();
 }

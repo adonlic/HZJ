@@ -18,14 +18,17 @@ import java.util.List;
 import hr.fer.ppj.projekt.hzj.R;
 import hr.fer.ppj.projekt.hzj.core.adapters.QuizzesRecyclerAdapter;
 import hr.fer.ppj.projekt.hzj.core.cache.QuizzesCache;
+import hr.fer.ppj.projekt.hzj.core.cache.UserCache;
+import hr.fer.ppj.projekt.hzj.core.helpers.IObserveUser;
 import hr.fer.ppj.projekt.hzj.core.helpers.IObserver;
 import hr.fer.ppj.projekt.hzj.core.helpers.QuizHelper;
+import hr.fer.ppj.projekt.hzj.core.helpers.UserHelper;
 import hr.fer.ppj.projekt.hzj.core.models.business.Quiz;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuizzesFragment extends Fragment implements IObserver {
+public class QuizzesFragment extends Fragment implements IObserver, IObserveUser {
     boolean firstTime = true;
     QuizzesRecyclerAdapter quizzesRecyclerAdapter1;
     QuizzesRecyclerAdapter quizzesRecyclerAdapter2;
@@ -128,6 +131,20 @@ public class QuizzesFragment extends Fragment implements IObserver {
                             "Nešto je pošlo po zlu ili nema traženog podatka...",
                             Toast.LENGTH_SHORT)
                     .show();
+
+        // API CALL FOR USER RESULTS
+        if (UserCache.getUser() != null)
+            UserHelper.getUserQuizResults(this);
+    }
+
+    @Override
+    public void notifySpecificResult() {
+        // update user quiz result to quiz list...
+        quizzesRecyclerAdapter1.updateThatUserDataCame();
+        quizzesRecyclerAdapter2.updateThatUserDataCame();
+        quizzesRecyclerAdapter3.updateThatUserDataCame();
+        quizzesRecyclerAdapter4.updateThatUserDataCame();
+        quizzesRecyclerAdapter5.updateThatUserDataCame();
     }
 
     public void fillWithData() {

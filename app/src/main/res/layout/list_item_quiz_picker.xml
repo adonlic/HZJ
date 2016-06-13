@@ -1,0 +1,21 @@
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/choise_container"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginBottom="5dp"
+    android:backgroundTint="@color/colorPrimary"
+    cardView:cardCornerRadius="5dp">
+
+    <TextView
+        android:id="@+id/choise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/colorBackground"
+        android:textSize="20sp"
+        android:text="-"/>
+
+</android.support.v7.widget.CardView>

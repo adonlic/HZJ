@@ -7,7 +7,7 @@ import hr.fer.ppj.projekt.hzj.core.models.business.User;
 import hr.fer.ppj.projekt.hzj.core.models.business.Video;
 
 /**
- * Created by ANTE on 12.6.2016..
+ * Created by ANTE on 20.5.2016..
  */
 public class UserCache {
     private static User user;

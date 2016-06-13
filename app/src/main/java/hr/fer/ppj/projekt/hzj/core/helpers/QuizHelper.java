@@ -16,7 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by ANTE on 12.6.2016..
+ * Created by ANTE on 20.5.2016..
  */
 public class QuizHelper {
     private static Context context = HZJApplication.getContext();

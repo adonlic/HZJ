@@ -34,7 +34,7 @@ public class SectionsHelper {
 
             @Override
             public void onFailure(Call<List<Section>> call, Throwable t) {
-
+                    observer.notifyDownloaded(false);
             }
         });
     }

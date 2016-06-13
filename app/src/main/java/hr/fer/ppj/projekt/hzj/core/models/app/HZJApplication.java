@@ -12,7 +12,7 @@ import hr.fer.ppj.projekt.hzj.core.services.HZJService;
 public class HZJApplication extends Application {
     // private static HZJApplication ourInstance = new HZJApplication();
     private static Context context;
-    private static HZJContext localCache;
+    // private static HZJContext localCache;
 
     /*
     public static HZJApplication getInstance() {
@@ -29,7 +29,7 @@ public class HZJApplication extends Application {
         super.onCreate();
 
         context = this;
-        localCache = new HZJContext(this);
+        // localCache = new HZJContext(this);
         HZJService.setupAPI();
     }
 

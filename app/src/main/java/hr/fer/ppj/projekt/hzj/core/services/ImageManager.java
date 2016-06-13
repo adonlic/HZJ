@@ -19,6 +19,14 @@ public class ImageManager {
             url += fragments[i] + "_";
         }
         url = url.substring(0, url.length() - 1);
+        url = url.replace("š", "%C5%A1");
+        url = url.replace("Š", "%C5%A1");
+        url = url.replace("ć", "%C4%87");
+        url = url.replace("Ć", "%C4%87");
+        url = url.replace("ž", "%C5%BE");
+        url = url.replace("Ž", "%C5%BE");
+        url = url.replace("đ", "%C4%91");
+        url = url.replace("Đ", "%C4%91");
 
         section.setBackgroundImageURL(ImageManager.onlineSectionImageRepository + url);
         // Log.i("IMAGE MANAGER", section.getBackgroundImageURL());

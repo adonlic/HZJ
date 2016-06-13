@@ -43,14 +43,23 @@
             android:text="opis..."/>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/user_result_card_view"
             android:layout_width="50dp"
             android:layout_height="12dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
             cardView:cardCornerRadius="3dp"
-            cardView:cardBackgroundColor="@android:color/white">
+            cardView:cardBackgroundColor="@android:color/holo_red_light">
 
+            <TextView
+                android:id="@+id/user_quiz_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="11sp"
+                android:textColor="@color/colorBackground"
+                android:text="0/0"/>
         </android.support.v7.widget.CardView>
         <!--
         <ProgressBar

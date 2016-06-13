@@ -22,7 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by ANTE on 11.6.2016..
+ * Created by ANTE on 18.5.2016..
  */
 public class UserHelper {
     private static Context context = HZJApplication.getContext();
@@ -160,13 +160,14 @@ public class UserHelper {
         });
     }
 
-    public static void getUserQuizResults() {
+    public static void getUserQuizResults(final IObserveUser observeUser) {
         Call<List<QuizResult>> call = HZJService.getService()
                 .getUserQuizResults(UserCache.getUser().getId());
         call.enqueue(new Callback<List<QuizResult>>() {
             @Override
             public void onResponse(Call<List<QuizResult>> call, Response<List<QuizResult>> response) {
                 UserCache.getUser().setQuizResultList(response.body());
+                observeUser.notifySpecificResult();
             }
 
             @Override
@@ -183,6 +184,7 @@ public class UserHelper {
             @Override
             public void onResponse(Call<List<Video>> call, Response<List<Video>> response) {
                 // UserCache.getUser().setFavoriteList(response.body());
+
             }
 
             @Override
